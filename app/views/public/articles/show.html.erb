@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-1">
+          <h1>投稿詳細</h1>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>title</th>
+                  <th>content</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%#= link_to "/" do %> <%#= image_tag @article.customer_id.get_profile_image(100,100) %> <%# end %></td>
+                  <td><%= @article.title  %></td>
+                  <td><%= @article.content %></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>

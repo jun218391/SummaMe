@@ -1,0 +1,25 @@
+<div class='container'>
+  <div class='row'>
+    <h3 class='m-4'>新規投稿</h3>
+  </div>
+  <%#= render 'layouts/error_messages', model: @customer %>
+
+  <div class='row'>
+    <%= form_with model: @article, url:articles_path, method: :post, local:true do |f| %>
+    <table class='table table-borderless'>
+      <tr>
+        <td><%= f.label :本のタイトル %></td>
+        <td><%= f.text_field :title, autofocus: true %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :本の要約 %></td>
+        <td><%= f.text_area :content, autofocus: true %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit '投稿する' %></td>
+      </tr>
+    </table>
+   <% end %>
+  </div>
+</div>

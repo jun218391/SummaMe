@@ -6,11 +6,128 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    
+    <header>
+      <nav class='navbar navbar-expand-md bg-dark'>
+        <h2 class='ml-5'>
+          <i class="fas fa-store text-light"></i>
+          
+          <% if admin_signed_in? %>
+            <%= link_to 'SummaMe', admin_root_path, class:'text-light' %>
+          <% else %>
+            <%= link_to 'SummaMe', root_path, class:'text-light' %>
+          <% end %>
+        </h2>
+        <div class='navbar-collapse justify-content-center'>
+          <% if customer_signed_in? %>
+            <p class='text-light'>ようこそ、<%= current_customer.name %>さん！</p>
+          <% end %>
+        </div>
+        <div class='collapse navbar-collapse flex-column order-md-last align-items-end mr-5'>
+          <ul class='nav navbar-nav ml-auto'>
+            <% if customer_signed_in? %>
+            <!--顧客がログインしているとき-->
+            <li>
+              <%= link_to customers_my_page_path, class:'nav-link text-light' do %>
+                 <i class="fas fa-user"></i> マイページ
+              <% end %>
+            </li>
+            <li>
+              <%= link_to articles_path, class:'nav-link text-light' do %>
+                <i class="fas fa-gift"></i> 投稿一覧
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_article_path, class:'nav-link text-light' do %>
+                <i class="fas fa-shopping-cart"></i> 新規投稿
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_customer_session_path, method: :delete, class:'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+              <% end %>
+            </li>
+            
+            <% elsif admin_signed_in? %>
+            <!--管理者がログインしているとき-->
+            <li>
+              <%= link_to admin_articles_path, class:'nav-link text-light' do %>
+                <i class="fas fa-gift"></i> 投稿一覧
+              <% end %>
+            </li>
+            <li>
+              <%= link_to admin_customers_path, class:'nav-link text-light' do %>
+                <i class="fas fa-users"></i> 会員一覧
+             <% end %>
+            </li>
+            <li>
+             <%= link_to destroy_admin_session_path, method: :delete,class:'nav-link text-light' do%>
+               <i class="fas fa-sign-out-alt"></i> ログアウト
+             <% end %>
+            </li>
+            
+            <% else %>
+              <!--ログインしていないとき-->
+            <li>
+              <%= link_to root_path, class:'nav-link text-light' do %>
+                <i class="fas fa-house"></i> top
+              <% end %>
+            </li>
+            <li>
+              <%= link_to about_path, class:'nav-link text-light' do %>
+                <i class="fas fa-bell"></i> About
+              <% end %>
+            </li>
+            <li>
+             <%= link_to new_customer_registration_path, class:'nav-link text-light' do %>
+               <i class="fas fa-user-plus"></i> 新規登録
+             <% end %>
+            </li>
+            <li>
+              <%= link_to new_customer_session_path, class:'nav-link text-light' do %>
+                <i class="fas fa-sign-in-alt"></i> ログイン
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+          <!--検索フォーム-->
+          <div>
+            <%= form_tag("/", :method => "get") do %>
+              <%= text_field_tag :search %>
+              <%= submit_tag "Search", :username => nil, class:"btn btn-light" %>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
     <%= yield %>
+    
+    <footer class="bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <p>SummaMe</p>
+            <%#= image_tag('logo-white.png') %>
+          </div>
+          <div class="col-md-8">
+            <h6 class="text-white mt-2 mb-3">Link</h6>
+            <ul class="p-0 list-unstyled">
+              <li>
+                <a href="" title="About" class="text-white-50">会社概要</a>
+              </li>
+              <li>
+                <a href="" title="License informations" class="text-white-50">プライバシーポリシー</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
   </body>
 </html>

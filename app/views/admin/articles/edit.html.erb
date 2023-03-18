@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>記事タイトル：(<%= @article.title %>)の投稿情報編集</h2>
+            <%= form_with model: @article, url: admin_article_path(@article),method: :patch, local:true do |f| %>
+                <table class="table">
+                    <tr>
+                        <th>投稿ID</th>
+                        <td><%= @article.id %></td>
+                    </tr>
+                    <tr>
+                        <th><%= f.label :タイトル %></th>
+                        <td><%= f.text_field :title %></td>
+                    </tr>
+                    <tr>
+                        <th><%= f.label :内容 %></th>
+                        <td><%= f.text_area :content %></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><%= f.submit "変更を保存", class:'btn btn-success mb-2' %></th>
+                    </tr>
+                </table>
+            <% end %>
+        </div>
+    </div>
+</div>

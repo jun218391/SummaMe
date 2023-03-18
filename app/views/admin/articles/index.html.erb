@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>投稿一覧</h2>
+        <table class="table">
+          <thead>
+            <tr>
+                <th>記事ID</th>   
+                <th>タイトル</th>
+                <th>content</th>
+                <th></th>
+            </tr>
+          </thead>
+                        
+          <tbody>
+            <% @articles.each do |article| %>
+            <tr>
+                <th><%= article.id %></th>
+                <th>
+                  <%= link_to admin_article_path(article) do %>
+                    <%= article.title %>
+                  <% end %>
+                </th>
+                <th><%= article.content %></th>
+                <th></th>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+          <%= paginate @articles %>
+        </div>
+    </div>
+</div>
