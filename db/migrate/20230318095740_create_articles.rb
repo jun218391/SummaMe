@@ -2,7 +2,7 @@ class CreateArticles < ActiveRecord::Migration[6.1]
   def change
     create_table :articles do |t|
       
-      t.integer :customer_id, null: false, default: ""
+      t.integer :customer_id, null: false
       t.string :title, null: false, default: ""
       t.text :content, null: false, default: ""
       t.string :todo, null: false, default: ""
