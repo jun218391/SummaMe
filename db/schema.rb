@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2023_03_19_204316) do
   create_table "articles", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "title", default: "", null: false
-    t.text "content", default: "", null: false
+    t.text "content", null: false
     t.string "todo", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
