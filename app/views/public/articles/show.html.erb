@@ -33,7 +33,7 @@
             <% end %>
             
             <!--いいね機能-->
-            <div class="favorite_buttons_<%= @article.id %>">
+            <div id="favorite_buttons_<%= @article.id %>">
               <%= render "public/favorites/favorite-btn", article: @article %>
             </div>
             
