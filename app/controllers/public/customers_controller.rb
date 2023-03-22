@@ -1,6 +1,7 @@
 class Public::CustomersController < ApplicationController
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
+    @articles = Article.where(customer_id: current_customer.id)
   end
 
   def edit
@@ -10,13 +11,19 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = current_customer
     if @customer.update(customer_params)
-      redirect_to customers_my_page_path
+      redirect_to customer_path(@customer)
     else
       render "edit"
     end
   end
   
   def withdrawal_check
+    @customer = current_customer
+    if @customer.update(is_deleted: true)
+      reset_session
+      flash[:notice] = "SummaMeを退会しました"
+      redirect_to root_path
+    end
   end
   
   def withdrawal

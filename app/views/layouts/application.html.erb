@@ -32,8 +32,8 @@
             <% if customer_signed_in? %>
             <!--顧客がログインしているとき-->
             <li>
-              <%= link_to customers_my_page_path, class:'nav-link text-light' do %>
-                 <i class="fas fa-user"></i> マイページ
+              <%= link_to customer_path(current_customer.id), class:'nav-link text-light' do %>
+                 <i class="fas fa-user"></i> Home
               <% end %>
             </li>
             <li>

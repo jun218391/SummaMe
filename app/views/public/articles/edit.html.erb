@@ -1,2 +1,29 @@
-<h1>Public::Articles#edit</h1>
-<p>Find me in app/views/public/articles/edit.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <h3 class='m-4'>投稿情報編集</h3>
+  </div>
+    <!--プロフィール画像-->
+    <%#= image_tag @customer.get_profile_image(100,100) %>
+    
+  <div class='row'>
+    <%= form_with model: @article, url:article_path(@article),method: :patch, local:true do |f| %>
+    <table class='table table-borderless'>
+      <tr>
+        <td><%= f.label :タイトル %></td>
+        <td><%= f.text_field :title %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :内容 %></td>
+        <td><%= f.text_area :content %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :todo %></td>
+        <td><%= f.text_field :todo %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "編集内容を保存", class:'btn btn-success mb-2' %></td>
+    </table>
+   <% end %>
+  </div>
+</div>

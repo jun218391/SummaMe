@@ -8,8 +8,8 @@
                退会する場合は、「退会する」をクリックしてください。</p>
             </div>
             <div class="m-5">
-                <%= link_to "退会しない",customers_my_page_path,class:'btn btn-primary mb-2 mx-2 px-4' %>
-                <%= link_to "退会する",customers_withdrawal_path,class:'btn btn-danger mb-2 mx-2 px-4', method: :patch, data: { confirm: "本当に退会しますか？" } %>
+                <%= link_to "退会しない",customer_path(@customer),class:'btn btn-primary mb-2 mx-2 px-4' %>
+                <%= link_to "退会する",customers_withdrawal_path(@customer),class:'btn btn-danger mb-2 mx-2 px-4', method: :patch, data: { confirm: "本当に退会しますか？" } %>
             </div>
         </div>
     </div>

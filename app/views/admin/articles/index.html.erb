@@ -5,6 +5,7 @@
         <table class="table">
           <thead>
             <tr>
+                <th>投稿者</th> 
                 <th>記事ID</th>   
                 <th>タイトル</th>
                 <th>content</th>
@@ -15,6 +16,7 @@
           <tbody>
             <% @articles.each do |article| %>
             <tr>
+              　<th><%= article.customer.name %></th> 
                 <th><%= article.id %></th>
                 <th>
                   <%= link_to admin_article_path(article) do %>

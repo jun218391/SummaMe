@@ -1,23 +1,68 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-1">
-          <h1>投稿詳細</h1>
+          <h3>投稿詳細</h3>
+          投稿者：<%= image_tag @article.customer.get_profile_image(100,100) %><%= @article.customer.name %><br>
+          投稿日時：<%= @article.created_at.strftime('%Y/%m/%d/%H:%M:%S')  %>
+          
             <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>title</th>
-                  <th>content</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><%#= link_to "/" do %> <%#= image_tag @article.customer_id.get_profile_image(100,100) %> <%# end %></td>
-                  <td><%= @article.title  %></td>
-                  <td><%= @article.content %></td>
-                </tr>
-              </tbody>
+              <tr>
+                <th>タイトル</th>
+              </tr>
+              <tr>
+                <td><%= @article.title  %></td>
+              </tr>
+              <tr>
+                <th>投稿内容</th>
+              </tr>
+              <tr>
+                <td><%= @article.content %></td>
+              </tr>
+              <tr>
+                <th>todo</th>
+              </tr>
+              <tr>
+                <td><%= @article.todo %></td>
+              </tr>
             </table>
+            
+            <!--ログインユーザーが記事の投稿者なら記事の編集ボタンと削除ボタンを表示-->
+            <% if @article.customer == current_customer %>
+              <%= link_to "編集する", edit_article_path(@article), class:'btn btn-success' %>
+              <%= link_to "削除する", article_path(@article), {method: :delete, class: "btn btn-sm btn-danger","data-confirm" => "本当に削除しますか？" }%>
+            <% end %>
+            
+            <!--いいね機能-->
+            <div class="favorite_buttons_<%= @article.id %>">
+              <%= render "public/favorites/favorite-btn", article: @article %>
+            </div>
+            
+            <div>
+              <!--コメント表示-->
+              <p><%= @article.comments.count %>件のコメント</p>
+              <% @article.comments.each do |comment| %>
+                <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
+                <%= comment.customer.name %><br>
+                <%= comment.comment %><br>
+                <%= comment.created_at.strftime('%Y/%m/%d') %>
+            </div>
+
+            <div>
+              <!--コメントがログインユーザーのものなら削除ボタンを表示-->
+                <% if comment.customer == current_customer %>
+                  <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete, class: "btn btn-sm btn-danger" %>
+                <% end %>
+              <% end %>
+            </div>
+            
+            <div>
+              <!--コメント投稿機能-->
+              <%= form_with model: [@article, @comment] do |f| %>
+                <%= f.text_field :comment, rows: '5', placeholder: "返信をコメントする" %>
+                <%= f.submit "送信", class:'btn btn-success' %>
+              <% end %>
+            </div>
+
         </div>
     </div>
 </div>

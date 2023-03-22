@@ -1,9 +1,12 @@
 <div class="container">
         <%# if @book.errors.any? %>
-          <%#= @book.errors.count %>件のエラーが発生しました
+          <%#= @book.errors.count %>
+          <!--件のエラーが発生しました-->
         <!--  <ul>-->
             <%# @book.errors.full_messages.each do |message| %>
-              <li><%#= message %></li>
+              <!--<li>-->
+                <%#= message %>
+              <!--</li>-->
             <%# end %>
         <!--  </ul>-->
         <%# end %>
@@ -14,17 +17,24 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>title</th>
-                  <th>content</th>
+                  <th>投稿者</th>
+                  <th>タイトル</th>
+                  <th>投稿内容</th>
+                  <th>todo</th>
                 </tr>
               </thead>
               <tbody>
                 <% @articles.each do |article| %>
                 <tr>
-                  <td><%= link_to "/" do %> <%#= image_tag book.user.get_profile_image(100,100) %> <% end %></td>
+                  <td>
+                    <%= link_to customer_path(article.customer_id) do %>
+                      <%= image_tag article.customer.get_profile_image(100,100) %><br><%= article.customer.name %>
+                    <% end %>
+                  </td>
                   <td><%= link_to article.title, article_path(article)  %></td>
                   <td><%= article.content %></td>
+                  <td><%= article.todo %></td>
+                  <td><%= link_to "#{article.comments.count} コメント", article_path(article.id) %></td>
                 </tr>
                 <% end %>
               </tbody>

@@ -1,24 +1,52 @@
 <div class='container'>
+    
   <div class='row'>
-    <h3 class='m-5'>マイページ</h3>
-  </div>
-
-  <div class='row'>
-    <h5 class='col-2 font-weight-bolder'>登録情報</h5>
-    <%= link_to "編集する", customers_information_edit_path, class:'btn btn-success col-2' %>
+    <h5 class='col-2 font-weight-bolder m-5'>ユーザー情報</h5>
   </div>
 
   <div class='row py-3'>
-    <table class='table table-bordered'>
-      <tr>
-        <td class='col-3 table-secondary'>氏名</td>
-        <td><%= @customer.name %></td>
-      </tr>
-      <tr>
-        <td class='table-secondary'>メールアドレス</td>
-        <td><%= @customer.email %></td>
-      </tr>
-    </table>
+    <%= image_tag @customer.get_profile_image(100,100) %>
+    <%= @customer.name %>　
+    <!--フォロワー機能-->
+    <div>
+      <% if @customer != current_customer %>
+        <% if current_customer.following?(@customer) %>
+          <%= link_to "フォロー中", customer_relationships_path(@customer.id), class:"btn btn-outline-dark", method: :delete %>
+        <% else %>
+          <%= link_to "フォローする", customer_relationships_path(@customer.id), class:"btn btn-dark", method: :post %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
+  
+  <!--フォロー一覧リンク-->
+  <%= link_to "#{@customer.followings.count}フォロー中", followings_customer_path(@customer) %>　
+  <!--フォロワー一覧リンク-->
+  <%= link_to "#{@customer.followers.count}フォロワー", followers_customer_path(@customer) %> 
+        
+  <!--ログインユーザーのユーザー情報なら編集ボタンを表示-->
+    <% if @customer == current_customer %>
+      <%= link_to "アカウント編集", edit_customer_path(@customer), class:'btn btn-success col-2' %>
+    <% end %>
+  
+  <h3>投稿一覧</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>投稿内容</th>
+          <th>todo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @articles.each do |article| %>
+        <tr>
+          <td><%= link_to article.title, article_path(article)  %></td>
+          <td><%= article.content %></td>
+          <td><%= article.todo %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 
 </div>
