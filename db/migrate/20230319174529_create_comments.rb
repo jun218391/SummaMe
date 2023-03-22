@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration[6.1]
       
       t.integer :customer_id, null: false
       t.integer :article_id, null: false
-      t.text :comment, null: false, default: ""
+      t.text :comment, null: false
 
       t.timestamps
     end
