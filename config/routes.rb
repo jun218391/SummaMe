@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get '/about' => "homes#about"
+    get "search" => "searchs#search"
     
     get "customers/withdrawal_check" => "customers#withdrawal_check"
     patch "customers/withdrawal" => "customers#withdrawal"

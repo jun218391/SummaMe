@@ -30,7 +30,7 @@
         <div class='collapse navbar-collapse flex-column order-md-last align-items-end mr-5'>
           <ul class='nav navbar-nav ml-auto'>
             <% if customer_signed_in? %>
-            <!--顧客がログインしているとき-->
+            <!--顧客がログインしているときのリンク一覧-->
             <li>
               <%= link_to customer_path(current_customer.id), class:'nav-link text-light' do %>
                  <i class="fas fa-user"></i> Home
@@ -53,7 +53,7 @@
             </li>
             
             <% elsif admin_signed_in? %>
-            <!--管理者がログインしているとき-->
+            <!--管理者がログインしているときのリンク一覧-->
             <li>
               <%= link_to admin_articles_path, class:'nav-link text-light' do %>
                 <i class="fas fa-gift"></i> 投稿一覧
@@ -71,7 +71,7 @@
             </li>
             
             <% else %>
-              <!--ログインしていないとき-->
+              <!--ログインしていないときのリンク一覧-->
             <li>
               <%= link_to root_path, class:'nav-link text-light' do %>
                 <i class="fas fa-house"></i> top
@@ -95,12 +95,7 @@
             <% end %>
           </ul>
           <!--検索フォーム-->
-          <div>
-            <%= form_tag("/", :method => "get") do %>
-              <%= text_field_tag :search %>
-              <%= submit_tag "Search", :username => nil, class:"btn btn-light" %>
-            <% end %>
-          </div>
+          <%= render 'layouts/search' %>
         </div>
       </nav>
     </header>

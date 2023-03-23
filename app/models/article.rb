@@ -13,21 +13,23 @@ class Article < ApplicationRecord
       profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
-  # ログインユーザーが記事にいいねしているかを判定する
+  # ログインユーザーが記事にいいねしているかを判定
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end
   
-  # # フォローしたときの処理
-  # def follow(customer_id)
-  #   relationships.create(followed_id: customer_id)
-  # end
-  # # フォローを外すときの処理
-  # def unfollow(customer_id)
-  #   relationships.find_by(followed_id: customer_id).destroy
-  # end
-  # # フォローしているか判定
-  # def following?(customer)
-  #   followings.include?(customer)
-  # end
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @article = Article.where("title LIKE?","#{word}")
+    elsif search == "forward_match"
+      @article = Article.where("title LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @article = Article.where("title LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @article = Article.where("title LIKE?","%#{word}%")
+    else
+      @article = Article.all
+    end
+  end
 end

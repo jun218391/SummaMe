@@ -1,24 +1,29 @@
 <div class='container'>
     
   <div class='row'>
-    <h5 class='col-2 font-weight-bolder m-5'>ユーザー情報</h5>
+    <h5 class='col-2 font-weight-bolder m-4'>ユーザー情報</h5>
   </div>
 
   <div class='row py-3'>
-    <%= image_tag @customer.get_profile_image(100,100) %>
-    <%= @customer.name %>　
-    <!--フォロワー機能-->
-    <div>
-      <% if @customer != current_customer %>
-        <% if current_customer.following?(@customer) %>
-          <%= link_to "フォロー中", customer_relationships_path(@customer.id), class:"btn btn-outline-dark", method: :delete %>
-        <% else %>
-          <%= link_to "フォローする", customer_relationships_path(@customer.id), class:"btn btn-dark", method: :post %>
+    <div class="col">
+      <!--フォロワー機能-->
+      <div>
+        <% if @customer != current_customer %>
+          <% if current_customer.following?(@customer) %>
+            <%= link_to "フォロー中", customer_relationships_path(@customer.id), class:"btn btn-outline-dark", method: :delete %>
+          <% else %>
+            <%= link_to "フォローする", customer_relationships_path(@customer.id), class:"btn btn-dark", method: :post %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <!--ユーザープロフィール表示-->
+      <div>
+        <%= image_tag @customer.get_profile_image(100,100) %>
+        <%= @customer.name %>
+      </div>
     </div>
   </div>
-  
+
   <!--フォロー一覧リンク-->
   <%= link_to "#{@customer.followings.count}フォロー中", followings_customer_path(@customer) %>　
   <!--フォロワー一覧リンク-->

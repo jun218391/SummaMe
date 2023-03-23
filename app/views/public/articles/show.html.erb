@@ -1,8 +1,10 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-md-1">
+        <div class="col">
           <h3>投稿詳細</h3>
-          投稿者：<%= image_tag @article.customer.get_profile_image(100,100) %><%= @article.customer.name %><br>
+          投稿者：<%= link_to customer_path(@article.customer_id) do %>
+          <%= image_tag @article.customer.get_profile_image(100,100) %><%= @article.customer.name %>
+          <% end %><br>
           投稿日時：<%= @article.created_at.strftime('%Y/%m/%d/%H:%M:%S')  %>
           
             <table class="table">
@@ -37,32 +39,30 @@
               <%= render "public/favorites/favorite-btn", article: @article %>
             </div>
             
+            <!--コメント表示-->
             <div>
-              <!--コメント表示-->
               <p><%= @article.comments.count %>件のコメント</p>
               <% @article.comments.each do |comment| %>
-                <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
-                <%= comment.customer.name %><br>
+                <%= link_to customer_path(comment.customer) do %>
+                  <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
+                  <p><%= comment.customer.name %></p>
+                <% end %>
                 <%= comment.comment %><br>
-                <%= comment.created_at.strftime('%Y/%m/%d') %>
-            </div>
-
-            <div>
-              <!--コメントがログインユーザーのものなら削除ボタンを表示-->
+                <%= comment.created_at.strftime('%Y/%m/%d/%H:%M:%S') %>
+                <!--削除ボタン(コメントがログインユーザーのものならを表示)-->
                 <% if comment.customer == current_customer %>
                   <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete, class: "btn btn-sm btn-danger" %>
                 <% end %>
               <% end %>
             </div>
             
+            <!--コメント投稿機能-->
             <div>
-              <!--コメント投稿機能-->
               <%= form_with model: [@article, @comment] do |f| %>
                 <%= f.text_field :comment, rows: '5', placeholder: "返信をコメントする" %>
                 <%= f.submit "送信", class:'btn btn-success' %>
               <% end %>
             </div>
-
         </div>
     </div>
 </div>
