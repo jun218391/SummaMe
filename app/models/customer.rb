@@ -38,18 +38,8 @@ class Customer < ApplicationRecord
     followings.include?(customer)
   end
   
-  # 検索方法分岐
-  def self.looks(search, word)
-    if search == "perfect_match"                  #完全一致ならモデルクラス.where("列名 LIKE ?", "値")で値(文字列)を含む
-      @customer = Customer.where("name LIKE?", "#{word}") 
-    elsif search == "forward_match"               #前方一致なら{word}の後ろに%を追記で定義
-      @customer = Customer.where("name LIKE?","#{word}%") 
-    elsif search == "backward_match"              #後方一致なら{word}の前に%を追記で定義
-      @customer = Customer.where("name LIKE?","%#{word}")
-    elsif search == "partial_match"               #部分一致なら{word}の前後に%を追記で定義
-      @customer = Customer.where("name LIKE?","%#{word}%")
-    else
-      @customer = Customer.all
-    end
+  # ユーザー検索(部分検索)
+  def self.looks(word)
+    @customer = Customer.where("name LIKE?","%#{word}%")
   end
 end

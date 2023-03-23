@@ -18,18 +18,8 @@ class Article < ApplicationRecord
     favorites.exists?(customer_id: customer.id)
   end
   
-  # 検索方法分岐
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @article = Article.where("title LIKE?","#{word}")
-    elsif search == "forward_match"
-      @article = Article.where("title LIKE?","#{word}%")
-    elsif search == "backward_match"
-      @article = Article.where("title LIKE?","%#{word}")
-    elsif search == "partial_match"
-      @article = Article.where("title LIKE?","%#{word}%")
-    else
-      @article = Article.all
-    end
+  # 投稿検索（部分検索）
+  def self.looks(word)
+    @article = Article.where("title LIKE?","%#{word}%")
   end
 end

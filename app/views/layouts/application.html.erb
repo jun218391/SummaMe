@@ -27,6 +27,10 @@
             <p class='text-light'>ようこそ、<%= current_customer.name %>さん！</p>
           <% end %>
         </div>
+        
+        <!--検索フォーム-->
+        <%= render 'layouts/search' %>
+          
         <div class='collapse navbar-collapse flex-column order-md-last align-items-end mr-5'>
           <ul class='nav navbar-nav ml-auto'>
             <% if customer_signed_in? %>
@@ -94,8 +98,6 @@
             </li>
             <% end %>
           </ul>
-          <!--検索フォーム-->
-          <%= render 'layouts/search' %>
         </div>
       </nav>
     </header>
