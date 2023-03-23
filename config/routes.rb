@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
   }
-
+  
   scope module: :public do
+    # ゲストログイン
+    post '/guest_sign_in' => 'homes#guest'
+    
     root to: "homes#top"
     get '/about' => "homes#about"
     get "search" => "searchs#search"

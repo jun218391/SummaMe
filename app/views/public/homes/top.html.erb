@@ -3,9 +3,9 @@
         <div class="col">
             <h3>トップページ</h3>
             <% @articles.each do |article| %>
-              <%#= link_to "/" do %>
-              <%= image_tag article.customer.get_profile_image(100,100) %>
-              <%= article.customer.name %>
+              <%#= link_to article.customer do %>
+                  <%= image_tag article.customer.get_profile_image(100,100) %>
+                  <%= article.customer.name %>
               <%# end %>
               <p>本のタイトル：<%= link_to article_path(article) do %><%= article.title %><% end %></p>
               <p>記事の内容：<%= article.content %></p>

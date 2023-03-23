@@ -13,89 +13,109 @@
     
     <header>
       <nav class='navbar navbar-expand-md bg-dark'>
+        <!--adminとcustomerでリンク先を変更-->
         <h2 class='ml-5'>
           <i class="fas fa-store text-light"></i>
-          
           <% if admin_signed_in? %>
             <%= link_to 'SummaMe', admin_root_path, class:'text-light' %>
           <% else %>
             <%= link_to 'SummaMe', root_path, class:'text-light' %>
           <% end %>
         </h2>
+        
+        <!--ログイン後、ログインユーザーに対して表示-->
         <div class='navbar-collapse justify-content-center'>
           <% if customer_signed_in? %>
             <p class='text-light'>ようこそ、<%= current_customer.name %>さん！</p>
           <% end %>
         </div>
         
-        <!--検索フォーム-->
+        <!--検索フォーム（ログイン時のみ表示）-->
         <%= render 'layouts/search' %>
           
         <div class='collapse navbar-collapse flex-column order-md-last align-items-end mr-5'>
           <ul class='nav navbar-nav ml-auto'>
+            
+            <!--customerがログインしているときのリンク一覧-->
             <% if customer_signed_in? %>
-            <!--顧客がログインしているときのリンク一覧-->
-            <li>
-              <%= link_to customer_path(current_customer.id), class:'nav-link text-light' do %>
-                 <i class="fas fa-user"></i> Home
-              <% end %>
-            </li>
-            <li>
-              <%= link_to articles_path, class:'nav-link text-light' do %>
-                <i class="fas fa-gift"></i> 投稿一覧
-              <% end %>
-            </li>
-            <li>
-              <%= link_to new_article_path, class:'nav-link text-light' do %>
-                <i class="fas fa-shopping-cart"></i> 新規投稿
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_customer_session_path, method: :delete, class:'nav-link text-light' do %>
-                <i class="fas fa-sign-out-alt"></i> ログアウト
-              <% end %>
-            </li>
+              <!--webサイトhomeページリンク-->
+              <li>
+                <%= link_to customer_path(current_customer.id), class:'nav-link text-light' do %>
+                   <i class="fas fa-user"></i> Home
+                <% end %>
+              </li>
+              <!--投稿一覧リンク-->
+              <li>
+                <%= link_to articles_path, class:'nav-link text-light' do %>
+                  <i class="fas fa-gift"></i> 投稿一覧
+                <% end %>
+              </li>
+              <!--customer新規投稿リンク-->
+              <li>
+                <%= link_to new_article_path, class:'nav-link text-light' do %>
+                  <i class="fas fa-shopping-cart"></i> 新規投稿
+                <% end %>
+              </li>
+              <!--customerログアウトリンク-->
+              <li>
+                <%= link_to destroy_customer_session_path, method: :delete, class:'nav-link text-light' do %>
+                  <i class="fas fa-sign-out-alt"></i> ログアウト
+                <% end %>
+              </li>
             
-            <% elsif admin_signed_in? %>
             <!--管理者がログインしているときのリンク一覧-->
-            <li>
-              <%= link_to admin_articles_path, class:'nav-link text-light' do %>
-                <i class="fas fa-gift"></i> 投稿一覧
-              <% end %>
-            </li>
-            <li>
-              <%= link_to admin_customers_path, class:'nav-link text-light' do %>
-                <i class="fas fa-users"></i> 会員一覧
-             <% end %>
-            </li>
-            <li>
-             <%= link_to destroy_admin_session_path, method: :delete,class:'nav-link text-light' do%>
-               <i class="fas fa-sign-out-alt"></i> ログアウト
-             <% end %>
-            </li>
+            <% elsif admin_signed_in? %>
+              <!--投稿一覧リンク-->
+              <li>
+                <%= link_to admin_articles_path, class:'nav-link text-light' do %>
+                  <i class="fas fa-gift"></i> 投稿一覧
+                <% end %>
+              </li>
+              <!--会員一覧リンク-->
+              <li>
+                <%= link_to admin_customers_path, class:'nav-link text-light' do %>
+                  <i class="fas fa-users"></i> 会員一覧
+               <% end %>
+              </li>
+              <!--管理者ログアウトリンク-->
+              <li>
+               <%= link_to destroy_admin_session_path, method: :delete,class:'nav-link text-light' do%>
+                 <i class="fas fa-sign-out-alt"></i> ログアウト
+               <% end %>
+              </li>
             
+            <!--ログインしていないときのリンク一覧-->
             <% else %>
-              <!--ログインしていないときのリンク一覧-->
-            <li>
-              <%= link_to root_path, class:'nav-link text-light' do %>
-                <i class="fas fa-house"></i> top
-              <% end %>
-            </li>
-            <li>
-              <%= link_to about_path, class:'nav-link text-light' do %>
-                <i class="fas fa-bell"></i> About
-              <% end %>
-            </li>
-            <li>
-             <%= link_to new_customer_registration_path, class:'nav-link text-light' do %>
-               <i class="fas fa-user-plus"></i> 新規登録
-             <% end %>
-            </li>
-            <li>
-              <%= link_to new_customer_session_path, class:'nav-link text-light' do %>
-                <i class="fas fa-sign-in-alt"></i> ログイン
-              <% end %>
-            </li>
+              <!--ゲストログイン-->
+              <li>
+                <%= link_to '/guest_sign_in', method: :post, class:'nav-link text-light' do %>
+                  <i class="fas fa-user-plus"></i> ゲストログイン
+                <% end %>
+              </li>
+              <!--topページリンク-->
+              <li>
+                <%= link_to root_path, class:'nav-link text-light' do %>
+                  <i class="fas fa-house"></i> top
+                <% end %>
+              </li>
+              <!--aboutページリンク-->
+              <li>
+                <%= link_to about_path, class:'nav-link text-light' do %>
+                  <i class="fas fa-bell"></i> About
+                <% end %>
+              </li>
+              <!--新規登録リンク-->
+              <li>
+               <%= link_to new_customer_registration_path, class:'nav-link text-light' do %>
+                 <i class="fas fa-user-plus"></i> 新規登録
+               <% end %>
+              </li>
+              <!--customerログインリンク-->
+              <li>
+                <%= link_to new_customer_session_path, class:'nav-link text-light' do %>
+                  <i class="fas fa-sign-in-alt"></i> ログイン
+                <% end %>
+              </li>
             <% end %>
           </ul>
         </div>

@@ -6,17 +6,20 @@
           <thead>
             <tr>
                 <th>投稿者</th> 
-                <th>記事ID</th>   
-                <th>タイトル</th>
+                <th>ID</th>   
+                <th>title</th>
                 <th>content</th>
-                <th></th>
+                <th>todo</th>
             </tr>
           </thead>
-                        
           <tbody>
             <% @articles.each do |article| %>
             <tr>
-              　<th><%= article.customer.name %></th> 
+              　<th>
+                  <%= link_to admin_customer_path(article.customer) do %>
+                    <%= article.customer.name %>
+                  <% end %>
+                </th> 
                 <th><%= article.id %></th>
                 <th>
                   <%= link_to admin_article_path(article) do %>
@@ -24,7 +27,7 @@
                   <% end %>
                 </th>
                 <th><%= article.content %></th>
-                <th></th>
+                <th><%= article.todo %></th>
             </tr>
             <% end %>
           </tbody>
