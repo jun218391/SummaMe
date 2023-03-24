@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     post '/guest_sign_in' => 'homes#guest'
     # 検索フォーム
     get "search" => "searchs#search"
+    # 楽天API 書籍検索
+    get 'books/search' => 'books#search'
     
     root to: "homes#top"
     get '/about' => "homes#about"

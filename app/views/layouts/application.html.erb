@@ -43,6 +43,12 @@
                    <i class="fas fa-home"></i> Home
                 <% end %>
               </li>
+              <!--書籍検索リンク-->
+              <li>
+                <%= link_to books_search_path, class:'nav-link text-light' do %>
+                   <i class="fas fa-book"></i> 書籍検索
+                <% end %>
+              </li>
               <!--投稿一覧リンク-->
               <li>
                 <%= link_to articles_path, class:'nav-link text-light' do %>
@@ -122,7 +128,9 @@
         <div class="row no-gutters">
           <div class="col-md-4">
             <p>SummaMe</p>
-            <%#= image_tag('logo-white.png') %>
+            <!-- Rakuten Web Services Attribution Snippet FROM HERE -->
+            <a href="https://developers.rakuten.com/" target="_blank">Supported by Rakuten Developers</a>
+            <!-- Rakuten Web Services Attribution Snippet TO HERE -->
           </div>
           <div class="col-md-8">
             <h6 class="text-white mt-2 mb-3">Link</h6>

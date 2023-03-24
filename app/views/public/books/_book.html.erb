@@ -1,0 +1,14 @@
+                <!--検索にヒットした書籍情報を一覧表示-->
+<div class="container">
+    <div class="row">
+        <div class="col m-5">
+            <table class="table">
+            <% @books.each do |book| %>
+                <tr><td><%= link_to (image_tag(book.medium_image_url)), book.item_url %></td></tr>
+                <tr><td><%= book.title %></td></tr>
+                <tr><td><%= book.author %></td></tr>
+            <% end %>
+            </table>
+        </div>
+    </div>
+</div>
