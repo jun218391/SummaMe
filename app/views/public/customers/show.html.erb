@@ -19,39 +19,53 @@
       <!--ユーザープロフィール表示-->
       <div>
         <%= image_tag @customer.get_profile_image(100,100) %>
-        <%= @customer.name %>
+        <%= @customer.name %><br>
+        投稿数：<%= @customer.articles.count %>件
+      </div>
+      <div>
+        <!--フォロー一覧リンク-->
+        <%= link_to "#{@customer.followings.count}フォロー中", followings_customer_path(@customer) %>　
+        <!--フォロワー一覧リンク-->
+        <%= link_to "#{@customer.followers.count}フォロワー", followers_customer_path(@customer) %> 
       </div>
     </div>
   </div>
 
-  <!--フォロー一覧リンク-->
-  <%= link_to "#{@customer.followings.count}フォロー中", followings_customer_path(@customer) %>　
-  <!--フォロワー一覧リンク-->
-  <%= link_to "#{@customer.followers.count}フォロワー", followers_customer_path(@customer) %> 
         
   <!--ログインユーザーのユーザー情報なら編集ボタンを表示-->
-    <% if @customer == current_customer %>
-      <%= link_to "アカウント編集", edit_customer_path(@customer), class:'btn btn-success col-2' %>
-    <% end %>
+  <% if @customer == current_customer %>
+    <%= link_to "アカウント編集", edit_customer_path(@customer), class:'btn btn-success col-2' %>
+  <% end %>
   
-  <h3>投稿一覧</h3>
+  <!--ログインユーザーの投稿一覧表示-->
+  <h3><%= "#{current_customer.name}さんの投稿一覧" %></h3>
     <table class="table">
+      
       <thead>
         <tr>
-          <th>タイトル</th>
+          <th>本のタイトル</th>
           <th>投稿内容</th>
           <th>todo</th>
         </tr>
       </thead>
+      
       <tbody>
         <% @articles.each do |article| %>
         <tr>
-          <td><%= link_to article.title, article_path(article)  %></td>
-          <td><%= article.content %></td>
+          <td><%= link_to "『#{article.title}』", article_path(article)  %></td>
+          <td><%= article.content.truncate(30) %></td>
           <td><%= article.todo %></td>
+          <td>
+            <!--記事の投稿者がログインユーザーなら編集ボタンと削除ボタンを表示-->
+            <% if article.customer == current_customer %>
+              <%= link_to "編集する", edit_article_path(article), class:'btn btn-success' %>
+              <%= link_to "削除する", article_path(article), {method: :delete, class: "btn btn-sm btn-danger","data-confirm" => "本当に削除しますか？" }%>
+            <% end %>
+          </td>
         </tr>
         <% end %>
       </tbody>
+      
     </table>
 
 </div>

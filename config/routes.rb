@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   scope module: :public do
     # ゲストログイン
     post '/guest_sign_in' => 'homes#guest'
+    # 検索フォーム
+    get "search" => "searchs#search"
     
     root to: "homes#top"
     get '/about' => "homes#about"
-    get "search" => "searchs#search"
     
     get "customers/withdrawal_check" => "customers#withdrawal_check"
     patch "customers/withdrawal" => "customers#withdrawal"
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
        get :followings, :followers
       end
     end
-    
     
     resources :articles, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
       resources :comments, only: [:create, :destroy]
@@ -42,7 +42,6 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :customers, only: [:index, :show, :edit, :update]
     resources :articles, only: [:index, :show, :edit, :update, :destroy]
-  # root to: 'homes#top'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

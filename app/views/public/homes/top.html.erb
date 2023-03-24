@@ -1,14 +1,19 @@
 <div class="container">
     <div class="row">
-        <div class="col">
-            <h3>トップページ</h3>
+        <div class="col m-5">
+            <h3>ようこそ、SummaMeへ！</h3>
+            <p>SummaMeは読書のアウトプットを目的としたwebサイトです。<br>
+            読書のアウトプットとは「読書をすることで得られた知識を、自分の言葉で表現してその内容を実際に行動に移すこと」です。<br>
+            読んで終わるのではなく読書後に本の要約を整理しまとめることでアウトプットし、読書の質を高めることができます。<br>
+            また、本の内容を実践することで自己の能力向上につながります。<br>
+            読書アウトプットを習慣化するためにぜひご利用ください。</p>
             <% @articles.each do |article| %>
               <%#= link_to article.customer do %>
                   <%= image_tag article.customer.get_profile_image(100,100) %>
                   <%= article.customer.name %>
               <%# end %>
-              <p>本のタイトル：<%= link_to article_path(article) do %><%= article.title %><% end %></p>
-              <p>記事の内容：<%= article.content %></p>
+              <p><%= link_to article_path(article) do %><%= article.title %><% end %></p>
+              <p><%= article.content %></p>
             <% end %>
         </div>
     </div>

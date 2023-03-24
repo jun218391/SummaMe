@@ -9,6 +9,17 @@
   <div class='row'>
     <%= form_with model: @customer, url:customer_path(@customer), local:true do |f| %>
     <table class='table table-borderless'>
+        <% if @customer.name == "ゲストユーザー" %>
+        <P>ゲストユーザーはユーザー情報を編集できません</P>
+          <tr>
+            <td><%= f.label :表示名 %></td>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :メールアドレス %></td>
+            <td><%= @customer.email %></td>
+          </tr>
+          <% else %>
       <tr>
         <td><%= f.label :表示名 %></td>
         <td><%= f.text_field :name %></td>
@@ -22,6 +33,7 @@
         <td><%= f.submit "編集内容を保存", class:'btn btn-success mb-2' %></td>
         <td><%= link_to "退会する", customers_withdrawal_check_path(@customer), class:'btn btn-danger mb-2' %></td>
       </tr>
+        <% end %>
     </table>
    <% end %>
   </div>
