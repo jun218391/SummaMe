@@ -8,12 +8,10 @@
             また、本の内容を実践することで自己の能力向上につながります。<br>
             読書アウトプットを習慣化するためにぜひご利用ください。</p>
             <% @articles.each do |article| %>
-              <%#= link_to article.customer do %>
-                  <%= image_tag article.customer.get_profile_image(100,100) %>
-                  <%= article.customer.name %>
-              <%# end %>
-              <p><%= link_to article_path(article) do %><%= article.title %><% end %></p>
-              <p><%= article.content %></p>
+                <%= image_tag article.customer.get_profile_image(100,100) %>
+                <%= article.customer.name %>
+                <p><%= link_to article_path(article) do %><%= article.title %><% end %></p>
+                <p><%= article.content %></p>
             <% end %>
         </div>
     </div>

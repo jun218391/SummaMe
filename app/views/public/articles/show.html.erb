@@ -1,5 +1,9 @@
 <div class="container">
     <div class="row">
+      <!--戻るボタン-->
+      <%= link_to customer_path(@article.customer_id) do %>
+        <i class="fas fa-arrow-left fa-lg"></i>
+      <% end %>
         <div class="col m-5">
           <h3>投稿詳細</h3>
           投稿者：

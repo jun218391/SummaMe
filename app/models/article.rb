@@ -4,6 +4,10 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   
+  # 公開・非公開機能
+  scope :published, -> {where(is_published_flag: true)}
+  scope :unpublished, -> {where(is_published_flag: false)}
+ 
   # 画像
   def get_image(width, height)
     unless profile_image.attached?

@@ -1,7 +1,12 @@
 class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
-    @articles = Article.where(customer_id: @customer.id)
+  # 　非公開の記事はログインユーザー以外表示しない
+    if @customer == current_customer
+      @articles = Article.where(customer_id: @customer.id)
+    else
+      @articles = Article.where(customer_id: @customer.id).published
+    end
   end
 
   def edit

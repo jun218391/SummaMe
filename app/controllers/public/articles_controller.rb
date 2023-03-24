@@ -4,8 +4,8 @@ class Public::ArticlesController < ApplicationController
   end
   
   def index
-    @articles = Article.all
-    # @article.customer_id = current_customer.id
+    # 公開された記事のみ表示
+    @articles = Article.published
   end
 
   def show
@@ -46,7 +46,7 @@ class Public::ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:title, :content, :todo)
+    params.require(:article).permit(:title, :content, :todo, :is_published_flag)
   end
 
 end

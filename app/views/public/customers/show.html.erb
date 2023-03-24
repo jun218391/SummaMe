@@ -1,8 +1,8 @@
 <div class='container'>
     
-  <div class='row'>
-    <h5 class='col-2 font-weight-bolder m-4'>ユーザー情報</h5>
-  </div>
+    <div class='row'>
+      <h5 class='col-2 font-weight-bolder m-4'>ユーザー情報</h5>
+    </div>
 
   <div class='row py-3'>
     <div class="col">
@@ -55,13 +55,12 @@
           <td><%= link_to "『#{article.title}』", article_path(article)  %></td>
           <td><%= article.content.truncate(30) %></td>
           <td><%= article.todo %></td>
-          <td>
-            <!--記事の投稿者がログインユーザーなら編集ボタンと削除ボタンを表示-->
-            <% if article.customer == current_customer %>
-              <%= link_to "編集する", edit_article_path(article), class:'btn btn-success' %>
-              <%= link_to "削除する", article_path(article), {method: :delete, class: "btn btn-sm btn-danger","data-confirm" => "本当に削除しますか？" }%>
-            <% end %>
-          </td>
+          <!--ログインユーザーにのみ記事の公開・非公開ステータスを表示-->
+          <% if article.customer == current_customer && article.is_published_flag == false %>
+            <td>"非公開"</td>
+          <% else %>
+            <td>"公開"</td>
+          <% end %>
         </tr>
         <% end %>
       </tbody>

@@ -1,29 +1,38 @@
 <div class='container'>
-  <div class='row'>
-    <h3 class='m-4'>投稿情報編集</h3>
-  </div>
-    <!--プロフィール画像-->
-    <%#= image_tag @customer.get_profile_image(100,100) %>
-    
-  <div class='row'>
-    <%= form_with model: @article, url:article_path(@article),method: :patch, local:true do |f| %>
-    <table class='table table-borderless'>
-      <tr>
-        <td><%= f.label :タイトル %></td>
-        <td><%= f.text_field :title %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :内容 %></td>
-        <td><%= f.text_area :content %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :todo %></td>
-        <td><%= f.text_field :todo %></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><%= f.submit "編集内容を保存", class:'btn btn-success mb-2' %></td>
-    </table>
-   <% end %>
-  </div>
+    <div class='row'>
+      <!--戻るボタン-->
+      <%= link_to article_path(@article) do %>
+        <i class="fas fa-arrow-left fa-lg"></i>
+      <% end %>
+      <h3 class='m-4'>投稿情報編集</h3>
+    </div>
+    <div class='row'>
+        <%= form_with model: @article, url:article_path(@article),method: :patch, local:true do |f| %>
+            <table class='table table-borderless'>
+                <!--公開・非公開-->
+                <div>
+                  <%= f.label :is_published_flag, "公開", value: true %>
+                  <%= f.radio_button :is_published_flag, 'true' %>
+                  <%= f.label :is_published_flag, "非公開", value: false %>
+                  <%= f.radio_button :is_published_flag,'false' %>
+                </div>
+                <tr>
+                    <td><%= f.label :タイトル %></td>
+                    <td><%= f.text_field :title %></td>
+                </tr>
+                <tr>
+                    <td><%= f.label :内容 %></td>
+                    <td><%= f.text_area :content %></td>
+                </tr>
+                <tr>
+                    <td><%= f.label :todo %></td>
+                    <td><%= f.text_field :todo %></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><%= f.submit "編集内容を保存", class:'btn btn-success mb-2' %></td>
+                </tr>
+            </table>
+        <% end %>
+    </div>
 </div>
