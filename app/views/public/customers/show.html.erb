@@ -31,14 +31,13 @@
     </div>
   </div>
 
-        
   <!--ログインユーザーのユーザー情報なら編集ボタンを表示-->
   <% if @customer == current_customer %>
     <%= link_to "アカウント編集", edit_customer_path(@customer), class:'btn btn-success col-2' %>
   <% end %>
   
   <!--ログインユーザーの投稿一覧表示-->
-  <h3><%= "#{current_customer.name}さんの投稿一覧" %></h3>
+  <h3><%= "#{@customer.name}さんの投稿一覧" %></h3>
     <table class="table">
       
       <thead>
@@ -46,6 +45,7 @@
           <th>本のタイトル</th>
           <th>投稿内容</th>
           <th>todo</th>
+          <th></th>
         </tr>
       </thead>
       

@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
-    @articles = Article.where(customer_id: current_customer.id)
+    @articles = Article.where(customer_id: @customer.id)
   end
 
   def edit
