@@ -5,8 +5,8 @@
         <table class="table">
           <thead>
             <tr>
-                <th>投稿者</th> 
                 <th>ID</th>   
+                <th>投稿者</th> 
                 <th>title</th>
                 <th>content</th>
                 <th>todo</th>
@@ -15,19 +15,19 @@
           <tbody>
             <% @articles.each do |article| %>
             <tr>
-              　<th>
+                <td><%= article.id %></td>
+              　<td>
                   <%= link_to admin_customer_path(article.customer) do %>
                     <%= article.customer.name %>
                   <% end %>
-                </th> 
-                <th><%= article.id %></th>
-                <th>
+                </td> 
+                <td>
                   <%= link_to admin_article_path(article) do %>
                     <%= article.title %>
                   <% end %>
-                </th>
-                <th><%= article.content %></th>
-                <th><%= article.todo %></th>
+                </td>
+                <td><%= article.content %></td>
+                <td><%= article.todo %></td>
             </tr>
             <% end %>
           </tbody>

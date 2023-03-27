@@ -20,11 +20,8 @@
                         <th><%= f.label :todo %></th>
                         <td><%= f.text_area :todo %></td>
                     </tr>
-                    <tr>
-                        <th></th>
-                        <th><%= f.submit "変更を保存", class:'btn btn-success mb-2' %></th>
-                    </tr>
                 </table>
+                <%= f.submit "変更を保存", class:'btn btn-success mb-2' %>
             <% end %>
         </div>
     </div>
