@@ -30,7 +30,10 @@
       </div>
     </div>
   </div>
-
+  
+  <!--お気に入り記事一覧-->
+  <p><%=link_to"お気に入り記事",favorites_customer_path(@customer) %></p>
+  
   <!--ログインユーザーのユーザー情報なら編集ボタンを表示-->
   <% if @customer == current_customer %>
     <%= link_to "アカウント編集", edit_customer_path(@customer), class:'btn btn-success col-2' %>
