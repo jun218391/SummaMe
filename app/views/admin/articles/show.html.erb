@@ -3,13 +3,13 @@
         <div class="col">
             <h2><%= @article.title %>の投稿詳細</h2>
             <table class="table">
-                <tr>
+              <tr>
+                <th>本のタイトル</th>
+              </tr>
+              <tr>
                 <td>
                     <%= image_tag @article.get_book_image(80,80) %>
                 </td>
-              </tr>
-              <tr>
-                <th>本のタイトル</th>
               </tr>
               <tr>
                 <td><%= @article.title  %></td>
@@ -51,6 +51,7 @@
             </div>
             <div>
                 <%= link_to "編集する",edit_admin_article_path(@article),class:'btn btn-success mb-2' %>
+                <%= link_to "削除する", admin_article_path(@article), method: :delete, class: "btn btn-sm btn-danger" %>
                 <%= link_to "投稿一覧に戻る","/admin/articles",class:'btn btn-success mb-2' %>
             </div>
         </div>
