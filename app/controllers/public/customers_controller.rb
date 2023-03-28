@@ -34,6 +34,12 @@ class Public::CustomersController < ApplicationController
   def withdrawal_check
   end
   
+  def favorites
+    @customer = Customer.find(params[:id])
+    favorites = Favorite.where(customer_id: @customer.id).pluck(:article_id)
+    @favorite_articles = Article.find(favorites)
+  end
+  
   private
 
   def customer_params
