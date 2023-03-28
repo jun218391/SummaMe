@@ -24,8 +24,9 @@
                 </td> 
                 <td>
                   <%= link_to admin_article_path(article) do %>
-                    <%= article.title %>
+                    <p><%= article.title %></p>
                   <% end %>
+                  <%= image_tag article.get_book_image(85,85) %>
                 </td>
                 <td><%= article.content %></td>
                 <td><%= article.todo %></td>

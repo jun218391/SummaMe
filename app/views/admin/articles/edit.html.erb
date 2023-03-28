@@ -1,34 +1,41 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h2>記事タイトル：(<%= @article.title %>)の投稿情報編集</h2>
+            <h5>記事タイトル：『<%= @article.title %>』の投稿情報編集</h5>
             <%= form_with model: @article, url: admin_article_path(@article),method: :patch, local:true do |f| %>
-                <table class="table">
-                    <!--公開・非公開-->
+                <table class='table table-borderless'>
+                <!--公開・非公開-->
                 <div>
                   <%= f.label :is_published_flag, "公開", value: true %>
                   <%= f.radio_button :is_published_flag, 'true' %>
                   <%= f.label :is_published_flag, "非公開", value: false %>
                   <%= f.radio_button :is_published_flag,'false' %>
                 </div>
-                    <tr>
-                        <th>投稿ID</th>
-                        <td><%= @article.id %></td>
-                    </tr>
-                    <tr>
-                        <th><%= f.label :タイトル %></th>
-                        <td><%= f.text_field :title %></td>
-                    </tr>
-                    <tr>
-                        <th><%= f.label :内容 %></th>
-                        <td><%= f.text_area :content %></td>
-                    </tr>
-                    <tr>
-                        <th><%= f.label :todo %></th>
-                        <td><%= f.text_area :todo %></td>
-                    </tr>
-                </table>
-                <%= f.submit "変更を保存", class:'btn btn-success mb-2' %>
+                <tr>
+                    <td>ID</td>
+                    <td><%=  @article.id %></td>
+                </tr>
+                <tr>
+                    <td><%= f.label :本の画像 %></td>
+                    <td><%= f.file_field :book_image %></td>
+                </tr>
+                <tr>
+                    <td><%= f.label :タイトル %></td>
+                    <td><%= f.text_field :title, size: "60" %></td>
+                </tr>
+                <tr>
+                    <td><%= f.label :要約 %></td>
+                    <td><%= f.text_area :content, cols: "60", rows: "10" %></td>
+                </tr>
+                <tr>
+                    <td><%= f.label :todo %></td>
+                    <td><%= f.text_field :todo, size: "60" %></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><%= f.submit "編集内容を保存", class:'btn btn-success mb-2' %></td>
+                </tr>
+            </table>
             <% end %>
         </div>
     </div>
