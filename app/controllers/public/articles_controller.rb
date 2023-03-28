@@ -1,4 +1,5 @@
 class Public::ArticlesController < ApplicationController
+  before_action :ensure_customer, only: [:edit, :update, :destroy]
   
   def new
     @article = Article.new
@@ -47,6 +48,12 @@ class Public::ArticlesController < ApplicationController
   
   def article_params
     params.require(:article).permit(:title, :content, :todo, :book_image, :is_published_flag)
+  end
+  
+  def ensure_customer
+    @articles = current_customer.articles
+    @article = @articles.find_by(id: params[:id])
+    redirect_to root_path unless @article
   end
 
 end
