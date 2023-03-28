@@ -40,7 +40,7 @@
               <!--webサイトhomeページリンク-->
               <li>
                 <%= link_to customer_path(current_customer.id), class:'nav-link text-light' do %>
-                   <i class="fas fa-home"></i> Home
+                   <i class="fas fa-home"></i> マイページ
                 <% end %>
               </li>
               <!--書籍検索リンク-->
@@ -142,6 +142,9 @@
               </li>
               <li>
                 <a href="" title="License informations" class="text-white-50">プライバシーポリシー</a>
+              </li>
+              <li>
+                <%= link_to "管理者ページ", admin_session_path  %>
               </li>
             </ul>
           </div>

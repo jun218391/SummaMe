@@ -10,6 +10,7 @@
                 <th>title</th>
                 <th>content</th>
                 <th>todo</th>
+                <th>公開設定</th>
             </tr>
           </thead>
           <tbody>
@@ -28,6 +29,13 @@
                 </td>
                 <td><%= article.content %></td>
                 <td><%= article.todo %></td>
+                <td>
+                <% if article.is_published_flag %>
+                  公開
+                <% else %>
+                  非公開
+                <% end %>
+                </div>
             </tr>
             <% end %>
           </tbody>

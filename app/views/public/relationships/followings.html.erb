@@ -3,11 +3,11 @@
     <p>フォロー一覧</p>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col m-2">
       <!--フォロー一覧表示-->
       <% @customers.each do |customer| %>
         <%= link_to customer_path(customer) do %>
-          <%= image_tag customer.get_profile_image(100,100) %><%= customer.name %><br>
+          <%= image_tag customer.get_profile_image(50,50),class: "rounded-circle" %><%= customer.name %><br>
         <% end %>
       <% end %>
     </div>

@@ -18,7 +18,7 @@
       </div>
       <!--ユーザープロフィール表示-->
       <div>
-        <%= image_tag @customer.get_profile_image(100,100) %>
+        <%= image_tag @customer.get_profile_image(50,50),class: "rounded-circle" %>
         <%= @customer.name %><br>
         投稿数：<%= @customer.articles.count %>件
       </div>

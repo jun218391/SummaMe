@@ -1,47 +1,41 @@
 <div class="container">
-        <%# if @book.errors.any? %>
-          <%#= @book.errors.count %>
-          <!--件のエラーが発生しました-->
-        <!--  <ul>-->
-            <%# @book.errors.full_messages.each do |message| %>
-              <!--<li>-->
-                <%#= message %>
-              <!--</li>-->
-            <%# end %>
-        <!--  </ul>-->
-        <%# end %>
     <div class="row">
-        
-      <div class="col m-5">
-          <h3>投稿一覧</h3>
+        <div class="col m-5">
+            <h3>投稿一覧</h3>
             <table class="table">
-              <thead>
-                <tr>
-                  <th>投稿者</th>
-                  <th>本のタイトル</th>
-                  <th>本の要約</th>
-                  <th>todo</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @articles.each do |article| %>
-                <tr>
-                  <td>
-                    <%= link_to customer_path(article.customer_id) do %>
-                      <%= image_tag article.customer.get_profile_image(50,50) %><br><%= article.customer.name %>
+                <thead>
+                    <tr>
+                        <th>投稿者</th>
+                        <th>本の画像</th>
+                        <th>本のタイトル</th>
+                        <th>本の要約</th>
+                        <th>todo</th>
+                        <th>いいね<br>コメント数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @articles.each do |article| %>
+                    <tr>
+                        <td>
+                            <%= link_to customer_path(article.customer_id) do %>
+                              <%= image_tag article.customer.get_profile_image(50,50),class: "rounded-circle" %><br><%= article.customer.name %>
+                            <% end %>
+                        </td>
+                        <td>
+                            <%= link_to article_path(article) do %>
+                                <%= image_tag article.get_book_image(85,85) %>
+                            <% end %>
+                        </td>
+                        <td><%= link_to "『#{article.title}』".truncate(20), article_path(article)  %></td>
+                        <td><%= article.content.truncate(24) %></td>
+                        <td><%= article.todo %></td>
+                        <td><%= "#{article.comments.count} コメント" %><br><%= "♡#{article.favorites.count}いいね" %></td>
+                    </tr>
                     <% end %>
-                  </td>
-                  <td><%= link_to "『#{article.title}』".truncate(20), article_path(article)  %></td>
-                  <td><%= article.content.truncate(24) %></td>
-                  <td><%= article.todo %></td>
-                  <td><%= "#{article.comments.count} コメント" %><br><%= "♡#{article.favorites.count}いいね" %></td>
-                </tr>
-                <% end %>
-              </tbody>
+                </tbody>
             </table>
         </div>
     </div>
-  </div>
+</div>
      
   

@@ -12,7 +12,7 @@ class Public::HomesController < ApplicationController
   end
   
   def top
-    @articles = Article.order('id DESC').limit(4)
+    @articles = Article.published.order('id DESC').limit(4)
   end
 
   def about

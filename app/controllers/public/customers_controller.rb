@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
-  # 　非公開の記事はログインユーザー以外表示しない
+  # 　非公開の記事はログインユーザー以外に表示しない
     if @customer == current_customer
       @articles = Article.where(customer_id: @customer.id)
     else
@@ -22,7 +22,7 @@ class Public::CustomersController < ApplicationController
     end
   end
   
-  def withdrawal_check
+  def withdrawal
     @customer = current_customer
     if @customer.update(is_deleted: true)
       reset_session
@@ -31,7 +31,7 @@ class Public::CustomersController < ApplicationController
     end
   end
   
-  def withdrawal
+  def withdrawal_check
   end
   
   private

@@ -4,7 +4,7 @@
   </div>
   <%#= render 'layouts/error_messages', model: @customer %>
     <!--プロフィール画像-->
-    <%= image_tag @customer.get_profile_image(100,100) %>
+    <%= image_tag @customer.get_profile_image(100,100),class: "rounded-circle" %>
     
   <div class='row'>
     <%= form_with model: @customer, url:customer_path(@customer), local:true do |f| %>

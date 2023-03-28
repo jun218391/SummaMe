@@ -6,6 +6,9 @@ class Customer < ApplicationRecord
          
   has_one_attached :profile_image
   
+  validates :name,:email,presence: true
+  validates :password, length: { minimum: 6 }, on: :create 
+  
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy

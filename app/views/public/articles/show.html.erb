@@ -1,17 +1,22 @@
 <div class="container">
     <div class="row">
-      <!--戻るボタン-->
+      <!--ユーザー情報ページに戻るボタン-->
       <%= link_to customer_path(@article.customer_id) do %>
         <i class="fas fa-arrow-left fa-lg"></i>
       <% end %>
+      
         <div class="col m-5">
           <h3>投稿詳細</h3>
-          投稿者：
           <%= link_to customer_path(@article.customer_id) do %>
-            <%= image_tag @article.customer.get_profile_image(100,100) %><%= @article.customer.name %>
+            <%= image_tag @article.customer.get_profile_image(50,50),class: "rounded-circle" %><%= @article.customer.name %>
           <% end %><br>
           
             <table class="table">
+              <tr>
+                <td>
+                    <%= image_tag @article.get_book_image(80,80) %>
+                </td>
+              </tr>
               <tr>
                 <th>本のタイトル</th>
               </tr>
@@ -19,16 +24,19 @@
                 <td><%= @article.title  %></td>
               </tr>
               <tr>
-                <th>投稿内容</th>
+                <th>要約</th>
               </tr>
               <tr>
-                <td><%= @article.content %></td>
+                <td><%= safe_join(@article.content.split("\n"),tag(:br)) %></td>
               </tr>
               <tr>
                 <th>todo</th>
               </tr>
               <tr>
-                <td><%= @article.todo %></td>
+                <td><%= safe_join(@article.todo.split("\n"),tag(:br)) %></td>
+              </tr>
+              <tr>
+                <th>投稿日時</th>
               </tr>
               <tr>
                 <td><%= @article.created_at.strftime('%Y/%m/%d/%H:%M:%S')  %></td>
@@ -51,7 +59,7 @@
               <p><%= @article.comments.count %>件のコメント</p>
               <% @article.comments.each do |comment| %>
                 <%= link_to customer_path(comment.customer) do %>
-                  <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
+                  <p><%= image_tag comment.customer.get_profile_image(50,50),class: "rounded-circle" %></p>
                   <p><%= comment.customer.name %></p>
                 <% end %>
                 <%= comment.comment %><br>

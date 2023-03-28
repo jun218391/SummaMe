@@ -8,16 +8,20 @@
     <%= form_with model: @article, url:articles_path, method: :post, local:true do |f| %>
     <table class='table table-borderless'>
       <tr>
+        <td><%= f.label :本の画像 %></td>
+        <td><%= f.file_field :book_image, accept:"/image/*" %></td>
+      </tr>
+      <tr>
         <td><%= f.label :本のタイトル %></td>
-        <td><%= f.text_field :title, autofocus: true, size: "50" %></td>
+        <td><%= f.text_field :title, autofocus: true, size: "60" %></td>
       </tr>
       <tr>
         <td><%= f.label :本の要約 %></td>
-        <td><%= f.text_area :content, autofocus: true, cols: "60", rows: "10" %></td>
+        <td><%= f.text_area :content, autofocus: true,placeholder:"各章で「重要だと感じた個所」を抜き出してみましょう", cols: "60", rows: "10" %></td>
       </tr>
       <tr>
         <td><%= f.label :todo %></td>
-        <td><%= f.text_area :todo, autofocus: true, size: "50" %></td>
+        <td><%= f.text_area :todo, autofocus: true, placeholder:"本から学んだ今すぐ取り組むべきことを書き出してみましょう", size: "60" %></td>
       </tr>
       <tr>
         <td>

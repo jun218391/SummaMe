@@ -1,4 +1,5 @@
 class Admin::ArticlesController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @articles = Article.all.page(params[:page]).per(10)
   end
@@ -23,6 +24,6 @@ class Admin::ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :todo, :is_published_flag)
   end
 end

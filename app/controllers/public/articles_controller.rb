@@ -1,10 +1,11 @@
 class Public::ArticlesController < ApplicationController
+  
   def new
     @article = Article.new
   end
   
   def index
-    # 公開された記事のみ表示
+    # 公開されている記事のみ表示
     @articles = Article.published
   end
 
@@ -17,7 +18,6 @@ class Public::ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.customer_id = current_customer.id
     if @article.save
-      flash[:notice] = "投稿に成功しました"
       redirect_to articles_path
     else
       render :new
@@ -46,7 +46,8 @@ class Public::ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:title, :content, :todo, :is_published_flag)
+    params.require(:article).permit(:title, :content, :todo, :book_image, :is_published_flag)
   end
 
 end
+

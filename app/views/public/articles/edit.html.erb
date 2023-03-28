@@ -16,17 +16,22 @@
                   <%= f.label :is_published_flag, "非公開", value: false %>
                   <%= f.radio_button :is_published_flag,'false' %>
                 </div>
+                
                 <tr>
-                    <td><%= f.label :タイトル %></td>
-                    <td><%= f.text_field :title %></td>
+                    <td><%= f.label :本の画像 %></td>
+                    <td><%= f.file_field :book_image %></td>
                 </tr>
                 <tr>
-                    <td><%= f.label :内容 %></td>
-                    <td><%= f.text_area :content %></td>
+                    <td><%= f.label :タイトル %></td>
+                    <td><%= f.text_field :title, size: "60" %></td>
+                </tr>
+                <tr>
+                    <td><%= f.label :要約 %></td>
+                    <td><%= f.text_area :content, cols: "60", rows: "10" %></td>
                 </tr>
                 <tr>
                     <td><%= f.label :todo %></td>
-                    <td><%= f.text_field :todo %></td>
+                    <td><%= f.text_field :todo, size: "60" %></td>
                 </tr>
                 <tr>
                     <td></td>
