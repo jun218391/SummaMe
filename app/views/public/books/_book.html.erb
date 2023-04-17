@@ -8,6 +8,7 @@
                     <td><%= link_to (image_tag(book.medium_image_url)), book.item_url %></td>
                     <td><%= "『#{book.title}』" %></td>
                     <td><%= book.author %></td>
+                    <td><%= button_to '投稿する', {controller: 'articles', action: 'new'}, {method: :get, params: {image_url: book.medium_image_url, title: book.title}} %></td>
                 </tr>
             <% end %>
             </table>

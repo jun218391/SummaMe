@@ -16,9 +16,11 @@
                 <th>本のタイトル</th>
               </tr>
               <tr>
-                <td>
-                    <%= image_tag @article.get_book_image(80,80) %>
-                </td>
+                <% if @article.image_url.present? %>
+                  <td><%= image_tag @article.image_url %></td>
+                <% else %>
+                  <td><%= image_tag @article.get_book_image(80,80) %></td>
+                <% end %>
               </tr>
               <tr>
                 <td><%= @article.title  %></td>

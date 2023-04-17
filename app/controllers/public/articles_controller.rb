@@ -3,10 +3,12 @@ class Public::ArticlesController < ApplicationController
   
   def new
     @article = Article.new
+    @image_url = params[:image_url]
+    @article.title = params[:title]
   end
   
   def index
-    # 公開されている記事のみ表示
+    # 公開設定されている記事のみ表示
     @articles = Article.published
   end
 
@@ -47,7 +49,7 @@ class Public::ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:title, :content, :todo, :book_image, :is_published_flag)
+     params.require(:article).permit(:title, :content, :todo, :book_image, :is_published_flag, :image_url)
   end
   
   def ensure_customer

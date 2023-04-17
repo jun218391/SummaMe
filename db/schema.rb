@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2023_03_19_204316) do
     t.text "content", null: false
     t.string "todo", default: "", null: false
     t.boolean "is_published_flag", default: false, null: false
+    t.text "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

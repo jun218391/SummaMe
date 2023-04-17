@@ -9,11 +9,23 @@
     <table class='table table-borderless'>
       <tr>
         <td><%= f.label :本の画像 %></td>
-        <td><%= f.file_field :book_image, accept:"/image/*" %></td>
+        <!--楽天APIで検索された書籍の画像を@image_urlで表示-->
+        <% if @image_url.present? %>
+          <td><%= image_tag @image_url %></td>
+          <% f.hidden_field :image_url, value: @image_url %>
+        <% else %>
+          <td><%= f.file_field :book_image, accept:"/image/*" %></td>
+        <% end %>
       </tr>
       <tr>
         <td><%= f.label :本のタイトル %></td>
-        <td><%= f.text_field :title, autofocus: true, size: "60" %></td>
+        <!--楽天APIで検索された書籍のタイトルを＠titleで表示-->
+        <% if @title.present? %>
+          <td><%= f.text_field @title %></td>
+          <%# f.hidden_field :title, value: @title %>
+        <% else %>
+          <td><%= f.text_field :title, autofocus: true, size: "60" %></td>
+        <% end %>
       </tr>
       <tr>
         <td><%= f.label :本の要約 %></td>
