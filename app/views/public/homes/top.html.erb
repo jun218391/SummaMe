@@ -7,6 +7,8 @@
             読んで終わるのではなく読書後に本の要約を整理しまとめることでアウトプットし、読書の質を高めることができます。<br>
             また、本の内容を実践することで自己の能力向上につながります。<br>
             読書アウトプットを習慣化するためにぜひご利用ください。</p>
+            
+            <!--公開中の画像を新規順に表示-->
             <% @articles.each do |article| %>
             <div>
                 <%= image_tag article.customer.get_profile_image(50,50),class: "rounded-circle" %>
