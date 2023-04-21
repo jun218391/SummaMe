@@ -7,7 +7,10 @@
     </div>
     <div class="row">
         <div class="col m-5">
-            <p>書籍画像から楽天ブックスに遷移します。</p>
+            <p>
+                書籍画像から楽天ブックスに遷移します。<br>
+                検索結果の投稿するボタンから新規投稿に遷移します。
+            </p>
             <%= form_with url: books_search_path,method: :get, local: true do |f| %>
                 <!--text_fieldに本の題名を入力して検索、入力した内容はparams[:keyword]に格納-->
                 <%= f.text_field :keyword, required: true, class: "form-control", placeholder: "本のタイトルを入力" %>
